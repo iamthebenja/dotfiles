@@ -15,14 +15,11 @@ M.sources = {
 	}),
 	null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.shfmt,
-	null_ls.builtins.diagnostics.markdownlint,
+	--null_ls.builtins.diagnostics.markdownlint,
 	null_ls.builtins.diagnostics.write_good,
 	--null_ls.builtins.diagnostics.misspell,
-	null_ls.builtins.formatting.gofumpt,
+	--null_ls.builtins.formatting.gofumpt,
 }
-null_ls.config({
-	sources = M.sources,
-})
 
 M.config = require("iamthebenja.lsp.utils").base_config
 

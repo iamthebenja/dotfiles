@@ -1,21 +1,39 @@
 local M = {}
 
+function CreateNoremapGlobal(type, opts)
+	return function(lhs, rhs)
+		vim.api.nvim_set_keymap(type, lhs, rhs, opts)
+	end
+end
+
+function CreateNoremap(type, opts)
+	return function(lhs, rhs, bufnr)
+        bufnr = bufnr or 0
+		vim.api.nvim_buf_set_keymap(bufnr, type, lhs, rhs, opts)
+	end
+end
+
+NnoremapGlobal = CreateNoremapGlobal("n", { noremap = true })
+Nnoremap = CreateNoremap("n", { noremap = true })
+Inoremap = CreateNoremap("i", { noremap = true })
+
 local function setup_formatting(client, bufnr)
-    if client.resolved_capabilities.document_formatting then
-        vim.cmd([[
+	if client.server_capabilities.document_formatting then
+		vim.cmd([[
             augroup SyncFormatting
                 autocmd! BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
             augroup END
         ]])
-    end
+	end
 end
 
 local function setup_doc_highlight(client)
-    if not client.resolved_capabilities.document_highlight then
-        return
-    end
+	if not client.server_capabilities.document_highlight then
+		return
+	end
 
-    vim.cmd([[
+	vim.cmd(
+		[[
         hi LspReferenceText cterm=bold ctermbg=red guibg=#404040
         hi LspReferenceRead cterm=bold ctermbg=red guibg=#404040
         hi LspReferenceWrite cterm=bold ctermbg=red guibg=#404040
@@ -24,12 +42,32 @@ local function setup_doc_highlight(client)
             autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
             autocmd CursorHold <buffer> lua vim.lsp.buf.clear_references()
         augroup END
-    ]], false)
+    ]],
+		false
+	)
+end
+
+local function setup_keymaps()
+    Nnoremap("<leader>gi", ":lua vim.lsp.buf.implementation()<CR>")
+    Nnoremap("<leader>gd", ":lua vim.lsp.buf.definition()<CR>")
+	Nnoremap("<leader>K", ":lua vim.lsp.buf.hover()<CR>")
+	Nnoremap("<leader>vws", ":lua vim.lsp.buf.workspace_symbol()<CR>")
+	Nnoremap("<leader>vd", ":lua vim.diagnostic.open_float()<CR>")
+	Nnoremap("[d", ":lua vim.lsp.diagnostic.goto_next()<CR>")
+	Nnoremap("]d", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
+	Nnoremap("<leader>vca", ":lua vim.lsp.buf.code_action()<CR>")
+	Nnoremap("<leader>vrr", ":lua vim.lsp.buf.references()<CR>")
+	Nnoremap("<leader>vrn", ":lua vim.lsp.buf.rename()<CR>")
+	Inoremap("<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+
+    Nnoremap("<leader>lsd", ":lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+    Nnoremap("<leader>lll", ":call LspLocationList()<CR>")
 end
 
 function M.on_attach(client, bufnr)
-    setup_formatting(client, bufnr)
-    setup_doc_highlight(client, bufnr)
+	setup_formatting(client, bufnr)
+	setup_doc_highlight(client, bufnr)
+    setup_keymaps(client, bufnr)
 end
 
 -- See https://github.com/hrsh7th/cmp-nvim-lsp
@@ -55,8 +93,8 @@ end
 -- Useful when multiple clients are capable of formatting
 -- but we want to enable only one of them.
 function M.disable_formatting(client)
-	client.resolved_capabilities.document_formatting = false
-	client.resolved_capabilities.document_range_formatting = false
+	client.server_capabilities.document_formatting = false
+	client.server_capabilities.document_range_formatting = false
 end
 
 -- Base config for LSP's setup method

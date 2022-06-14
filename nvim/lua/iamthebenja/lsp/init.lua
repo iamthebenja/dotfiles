@@ -2,19 +2,25 @@
 local utils = require("iamthebenja.lsp.utils")
 local nvim_lsp = require("lspconfig")
 
-local servers_with_defaults = { "bashls", "cssls", "svelte", "eslint", "yamlls", "vimls" }
+local servers_with_defaults = { "bashls", "cssls", "eslint", "svelte", "yamlls", "vimls" }
 for _, lsp in ipairs(servers_with_defaults) do
 	nvim_lsp[lsp].setup(utils.base_config)
 end
 
 -- Conflicts with prettier formatting in TS files.
-nvim_lsp.stylelint_lsp.setup(utils.base_config_without_formatting)
+--nvim_lsp.stylelint_lsp.setup(utils.base_config_without_formatting)
 
 nvim_lsp.jsonls.setup(require("iamthebenja.lsp.jsonls").config)
 
 nvim_lsp.graphql.setup(require("iamthebenja.lsp.graphql").config)
 
-local null_ls_config = require("iamthebenja.lsp.null-ls").config
-nvim_lsp["null-ls"].setup(null_ls_config)
+local null_ls = require("iamthebenja.lsp.null-ls")
+require("null-ls").setup({
+	sources = null_ls.sources,
+	on_attach = null_ls.config.on_attach,
+	capabilities = null_ls.config.capabilities,
+})
 
 nvim_lsp.tsserver.setup(require("iamthebenja.lsp.tsserver").config)
+nvim_lsp.gopls.setup(utils.base_config)
+nvim_lsp.prismals.setup(utils.base_config)

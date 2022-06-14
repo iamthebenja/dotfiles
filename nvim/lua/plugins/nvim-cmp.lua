@@ -9,9 +9,6 @@ local source_mapping = {
 	path = "[Path]",
 }
 local lspkind = require("lspkind")
-lspkind.init({
-    with_text = true,
-})
 
 cmp.setup({
 	snippet = {
@@ -32,25 +29,25 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 	},
 
-    formatting = {
-        format = lspkind.cmp_format {
-      with_text = true,
-      menu = {
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[api]",
-        path = "[Path]",
-        luasnip = "[Snip]",
-        gh_issues = "[GHI]",
-        tn = "[TabNine]",
-            },
-        },
-    },
+	formatting = {
+		format = lspkind.cmp_format({
+			with_text = true,
+			menu = {
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[api]",
+				path = "[Path]",
+				luasnip = "[Snip]",
+				gh_issues = "[GHI]",
+				tn = "[TabNine]",
+			},
+		}),
+	},
 
 	sources = {
-        { name = "cmp_tabnine" },
+		{ name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
-        { name = "path" },
+		{ name = "path" },
 
 		-- For vsnip user.
 		-- { name = 'vsnip' },
