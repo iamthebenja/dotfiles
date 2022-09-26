@@ -22,5 +22,6 @@ require("null-ls").setup({
 })
 
 nvim_lsp.tsserver.setup(require("iamthebenja.lsp.tsserver").config)
-nvim_lsp.gopls.setup(utils.base_config)
+nvim_lsp.gopls.setup(require("iamthebenja.lsp.gopls").config)
 nvim_lsp.prismals.setup(utils.base_config)
+nvim_lsp.rust_analyzer.setup(require("iamthebenja.lsp.rust_analyzer").config)
