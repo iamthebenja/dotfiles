@@ -1,52 +1,48 @@
-local Remap = require("iamthebenja.keymap")
+local Remap = require("config.keymap")
 local nnoremap = Remap.nnoremap
 
-nnoremap("<C-p>", ":Telescope")
-nnoremap("<leader>ps", function()
+nnoremap("<leader>ts", function()
     require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})
-end)
+end, { desc = "Telescope grep string" })
+
 nnoremap("<C-p>", function()
     require('telescope.builtin').git_files()
-end)
-nnoremap("<Leader>pf", function()
+end, { desc = "Telescope git files" })
+
+nnoremap("<Leader>tf", function()
     require('telescope.builtin').find_files()
-end)
+end, { desc = "Telescope find files" })
 
-nnoremap("<leader>pw", function()
+nnoremap("<leader>tw", function()
     require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }
-end)
-nnoremap("<leader>pb", function()
+end, { desc = "Telescope find word" })
+
+nnoremap("<leader>tb", function()
     require('telescope.builtin').buffers()
-end)
-nnoremap("<leader>vh", function()
-    require('telescope.builtin').help_tags()
-end)
+end, { desc = "Telescope buffers" })
 
--- TODO: Fix this immediately
-nnoremap("<leader>vwh", function()
+nnoremap("<leader>th", function()
     require('telescope.builtin').help_tags()
-end)
+end, { desc = "Telescope help tags" })
 
-nnoremap("<leader>vrc", function()
-    require('iamthebenja.telescope').search_dotfiles({ hidden = true })
-end)
-nnoremap("<leader>va", function()
-    require('iamthebenja.telescope').anime_selector()
-end)
-nnoremap("<leader>vc", function()
-    require('iamthebenja.telescope').chat_selector()
-end)
-nnoremap("<leader>gc", function()
-    require('iamthebenja.telescope').git_branches()
-end)
-nnoremap("<leader>gw", function()
-    require('telescope').extensions.git_worktree.git_worktrees()
-end)
-nnoremap("<leader>gm", function()
-    require('telescope').extensions.git_worktree.create_git_worktree()
-end)
 nnoremap("<leader>td", function()
-    require('iamthebenja.telescope').dev()
-end)
+    require('iamthebenja.telescope').search_dotfiles({ hidden = true })
+end, { desc = "Telescope search dotfiles" })
+
+nnoremap("<leader>tk", function()
+    require('telescope.builtin').keymaps()
+end, { desc = "Telescope keymaps" })
+
+nnoremap("<leader>tgb", function()
+    require('iamthebenja.telescope').git_branches()
+end, { desc = "Telescope git branches" })
+
+nnoremap("<leader>tgw", function()
+    require('telescope').extensions.git_worktree.git_worktrees()
+end, { desc = "Telescope git worktree" })
+
+nnoremap("<leader>tgwc", function()
+    require('telescope').extensions.git_worktree.create_git_worktree()
+end, { desc = "Telescope create git worktree" })
 
 

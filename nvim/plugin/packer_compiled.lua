@@ -124,6 +124,16 @@ _G.packer_plugins = {
     path = "/home/ben/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
     url = "https://github.com/glepnir/lspsaga.nvim"
   },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/home/ben/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/ben/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   neoformat = {
     loaded = true,
     path = "/home/ben/.local/share/nvim/site/pack/packer/start/neoformat",
@@ -208,6 +218,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ben/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  ["typescript.nvim"] = {
+    loaded = true,
+    path = "/home/ben/.local/share/nvim/site/pack/packer/start/typescript.nvim",
+    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   },
   undotree = {
     loaded = true,

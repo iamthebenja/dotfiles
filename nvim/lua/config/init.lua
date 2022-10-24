@@ -1,9 +1,8 @@
-require("iamthebenja.set")
-require("iamthebenja.plugins")
-require("iamthebenja.lsp")
+require("config.set")
+require("config.plugins")
 
 local augroup = vim.api.nvim_create_augroup
-MyGroup = augroup('ThePrimeagen', {})
+MyGroup = augroup('iamthebenja', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -38,5 +37,5 @@ autocmd({"BufWritePre"}, {
 })
 
 vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
+-- vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25

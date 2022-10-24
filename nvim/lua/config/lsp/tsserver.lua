@@ -1,7 +1,7 @@
 local M = {}
 
 
-local utils = require("iamthebenja.lsp.utils")
+local utils = require("config.lsp.utils")
 
 -- Disable tsserver formatting, use prettierd from null-ls inside ts-utils
 -- See https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils#setup

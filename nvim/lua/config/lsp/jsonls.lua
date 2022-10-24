@@ -6,7 +6,7 @@ local function setup_lsp_ts_utils(client)
 	ts_utils.setup_client(client)
 end
 
-local utils = require("iamthebenja.lsp.utils")
+local utils = require("config.lsp.utils")
 
 -- Disable tsserver formatting, use prettierd from null-ls inside ts-utils
 -- See https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils#setup

@@ -21,6 +21,6 @@ M.sources = {
 	--null_ls.builtins.formatting.gofumpt,
 }
 
-M.config = require("iamthebenja.lsp.utils").base_config
+M.config = require("config.lsp.utils").base_config
 
 return M

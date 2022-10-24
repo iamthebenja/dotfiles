@@ -1,1 +1,1 @@
-require("iamthebenja")
+require("config")
