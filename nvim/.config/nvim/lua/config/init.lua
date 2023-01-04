@@ -1,8 +1,8 @@
 require("config.set")
-require("config.plugins")
+require("config.remap")
 
 local augroup = vim.api.nvim_create_augroup
-MyGroup = augroup('iamthebenja', {})
+MyGroup = augroup('MyGroup', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -22,14 +22,6 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufEnter", "BufWinEnter", "TabEnter"}, {
-    group = MyGroup,
-    pattern = "*.rs",
-    callback = function()
-        require("lsp_extensions").inlay_hints{}
-    end
-})
-
 autocmd({"BufWritePre"}, {
     group = MyGroup,
     pattern = "*",
@@ -37,5 +29,4 @@ autocmd({"BufWritePre"}, {
 })
 
 vim.g.netrw_browse_split = 0
--- vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
