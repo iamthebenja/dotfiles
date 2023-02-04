@@ -1,5 +1,6 @@
 require("config.set")
 require("config.remap")
+require("config.packer")
 
 local augroup = vim.api.nvim_create_augroup
 MyGroup = augroup('MyGroup', {})
